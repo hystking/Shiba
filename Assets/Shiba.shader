@@ -7,7 +7,7 @@
         _ShibaThreshild("Shiba Threshold", Range(0, 1)) = 0.45
         _WhiteThreshild("White Threshold", Range(0, 1)) = 0.78
         _NoiseAmount("Noise Amount", Range(0, 0.1)) = 0.05
-        _NoiseFrequency("Noise Frequency", Range(1, 32)) = 4
+        _NoiseFrequency("Noise Frequency", Range(1, 24)) = 4
         _EmissionAmount("Emission Amount", Range(0, 1)) = 0.3
         _FurFrequency("Fur Frequency", Range(64, 512)) = 256
         _FurLayers("Fur Layers", Range(0, 30)) = 16
@@ -16,6 +16,9 @@
         _FurDecay("Fur Decay", Range(0, 1)) = 1
         _FurShade("Fur Shade", Range(0, 1)) = 0.3
         _FurGravity("Fur Gravity", Range(0, 1)) = 0.5
+        _WindAmount("Wind Amount", Range(0, 2)) = 0.2
+        _WindFrequency("Wind Frequency", Range(0, 8)) = 0.5
+        _WindSpeed("Wind Speed", Range(0, 1)) = 0.2
     }
     
     SubShader

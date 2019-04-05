@@ -336,7 +336,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
   m_OcclusionCulling: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -400,7 +400,7 @@ MonoBehaviour:
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
-    fastMode: 0
+    fastMode: 1
     keepAlpha: 0
   fog:
     enabled: 1
@@ -532,13 +532,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766218729}
-  m_LocalRotation: {x: 0, y: 0.7070574, z: 0, w: 0.7071562}
-  m_LocalPosition: {x: 0.096, y: 0.37, z: 0}
+  m_LocalRotation: {x: 0.49116334, y: 0.5086146, z: 0.49123195, w: 0.50868565}
+  m_LocalPosition: {x: 0.096, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 89.992004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.992004, z: 88}
 --- !u!43 &856782190
 Mesh:
   m_ObjectHideFlags: 0

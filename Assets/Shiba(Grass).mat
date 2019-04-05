@@ -21,18 +21,21 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - _EmissionAmount: 0.5
-    - _FurAmount: 0.21
-    - _FurDecay: 0.52
+    - _FurAmount: 0.48
+    - _FurDecay: 0.8
     - _FurEmissive: 0.3
     - _FurFrequency: 64
     - _FurGravity: 0
-    - _FurLayers: 30
-    - _FurLength: 0.05
+    - _FurLayers: 8
+    - _FurLength: 0.059
     - _FurShade: 0.69
-    - _NoiseAmount: 0.05
-    - _NoiseFrequency: 4
-    - _ShibaThreshild: 0.45
-    - _WhiteThreshild: 0.78
+    - _NoiseAmount: 0.1
+    - _NoiseFrequency: 32
+    - _ShibaThreshild: 0
+    - _WhiteThreshild: 0
+    - _WindAmount: 0.2
+    - _WindFrequency: 0.5
+    - _WindSpeed: 0.2
     m_Colors:
     - _ShibaColor: {r: 0.25142398, g: 0.4716981, b: 0.26073134, a: 1}
-    - _WhiteColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WhiteColor: {r: 0.418156, g: 0.47058824, b: 0.2509804, a: 1}

@@ -16,4 +16,4 @@ Special Shader for Good Dogs
 
 You can also use this shader for "Shiba" (means Grass in Japanese)
 
-![Woof](shiba_on_shiba.jpg)
+![Woof](shiba_on_shiba.gif)

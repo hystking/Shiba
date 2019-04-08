@@ -84,10 +84,10 @@ void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStr
     outStream.Append(VertexOutput(input[2].position, input[2].normal, 0, furDirection2));
     outStream.RestartStrip();
 
-    for(int i = 0; i < _FurLayers; i++) {
-        outStream.Append(VertexOutput(input[0].position, input[0].normal, i / (_FurLayers - 1), furDirection0));
-        outStream.Append(VertexOutput(input[1].position, input[1].normal, i / (_FurLayers - 1), furDirection1));
-        outStream.Append(VertexOutput(input[2].position, input[2].normal, i / (_FurLayers - 1), furDirection2));
+    for(int i = 1; i <= _FurLayers; i++) {
+        outStream.Append(VertexOutput(input[0].position, input[0].normal, i / _FurLayers, furDirection0));
+        outStream.Append(VertexOutput(input[1].position, input[1].normal, i / _FurLayers, furDirection1));
+        outStream.Append(VertexOutput(input[2].position, input[2].normal, i / _FurLayers, furDirection2));
     }
 
     outStream.RestartStrip();
@@ -106,6 +106,6 @@ FragData frag (GeoToFragData i) : SV_Target {
     fd.albedo = half4(albedo, 1);
     fd.specular = half4(0, 0, 0, 0);
     fd.normal = half4(i.worldNormal * 0.5 + 0.5, 1);
-    fd.emission = _EmissionAmount * half4(albedo, 0);
+    fd.emission = half4(_EmissionAmount * albedo, 0);
     return fd;
 }

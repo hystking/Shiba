@@ -103,7 +103,7 @@ FragData frag (GeoToFragData i) : SV_Target {
     float furLower = (0.5 - _FurAmount) * 2;
     float alpha = i.furFactor > 0 ? i.furFactor * (1 - furLower) * _FurDecay + furLower : -1;
     clip(noise2 - alpha);
-    fd.albedo = half4(albedo, alpha);
+    fd.albedo = half4(albedo, 1);
     fd.specular = half4(0, 0, 0, 0);
     fd.normal = half4(i.worldNormal * 0.5 + 0.5, 1);
     fd.emission = _EmissionAmount * half4(albedo, 0);

@@ -62,23 +62,19 @@ GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFac
     return o;
 }
 
-float3 calcFurDirection(float3 localPosition, float3 localNormal, float3 polyNormal) {
+float3 calcFurDirection(float3 localPosition, float3 localNormal) {
     float3 noise = snoise_grad(localPosition * _WindFrequency + _Time.z * float3(0, 1, 0) * _WindSpeed);
     float3 furDirection = normalize(localNormal + float3(0, -1, 0) * _FurGravity + noise * _WindAmount);
-    float furDot = dot(polyNormal, furDirection);
-    return lerp(reflect(furDirection, polyNormal), furDirection, furDot * 0.5 + 0.5);
+    float furDot = dot(localNormal, furDirection);
+    return lerp(furDirection - (furDot - 0.5f) * localNormal, furDirection, furDot * 0.5 + 0.5);
 }
 
 [maxvertexcount(72)]
 void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStream<GeoToFragData> outStream)
 {
-    float3 polyNormal = normalize(cross(
-        input[1].position - input[0].position,
-        input[2].position - input[0].position
-    ));
-    float3 furDirection0 = calcFurDirection(input[0].position, input[0].normal, polyNormal);
-    float3 furDirection1 = calcFurDirection(input[1].position, input[1].normal, polyNormal);
-    float3 furDirection2 = calcFurDirection(input[2].position, input[2].normal, polyNormal);
+    float3 furDirection0 = calcFurDirection(input[0].position, input[0].normal);
+    float3 furDirection1 = calcFurDirection(input[1].position, input[1].normal);
+    float3 furDirection2 = calcFurDirection(input[2].position, input[2].normal);
     outStream.Append(VertexOutput(input[0].position, input[0].normal, 0, furDirection0));
     outStream.Append(VertexOutput(input[1].position, input[1].normal, 0, furDirection1));
     outStream.Append(VertexOutput(input[2].position, input[2].normal, 0, furDirection2));

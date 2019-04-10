@@ -69,7 +69,7 @@ float3 calcFurDrift(float3 localPosition, float3 localNormal, float3 gravityDire
     float3 noise = snoise_grad(localPosition * _WindFrequency + _Time.z * float3(0, 1, 0) * _WindSpeed);
     float3 furDirection = normalize(localNormal + gravityDirection * _FurGravity + noise * _WindAmount);
     float furDot = dot(localNormal, furDirection);
-    return lerp(normalize(furDirection - (furDot - 0.1f) * localNormal), furDirection, clamp(furDot, 0, 1)) - localNormal;
+    return normalize(lerp(normalize(furDirection - (furDot - 0.1f) * localNormal), furDirection, clamp(furDot, 0, 1))) - localNormal;
 }
 
 [maxvertexcount(60)]

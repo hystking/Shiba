@@ -8,9 +8,8 @@
         _WhiteThreshild("White Threshold", Range(0, 1)) = 0.78
         _NoiseAmount("Noise Amount", Range(0, 0.1)) = 0.05
         _NoiseFrequency("Noise Frequency", Range(1, 24)) = 4
-        _EmissionAmount("Emission Amount", Range(0, 1)) = 0.3
         _FurFrequency("Fur Frequency", Range(64, 512)) = 256
-        _FurLayers("Fur Layers", Range(0, 30)) = 16
+        _FurLayers("Fur Layers", Range(0, 20)) = 16
         _FurLength("Fur Length", Range(0, 0.1)) = 0.025
         _FurAmount("Fur Amount", Range(0, 1)) = 0.5
         _FurDecay("Fur Decay", Range(0, 1)) = 1
@@ -41,8 +40,10 @@
             #pragma fragment frag
             
             #include "UnityCG.cginc"
+            #include "UnityGlobalIllumination.cginc"
             #include "SimplexNoise3D.hlsl"
             #include "Shiba.hlsl"
+            
             ENDCG
         }
         UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"

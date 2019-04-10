@@ -4,7 +4,6 @@ float _ShibaThreshild;
 float _WhiteThreshild;
 float _NoiseAmount;
 float _NoiseFrequency;
-float _EmissionAmount;
 float _FurAmount;
 float _FurDecay;
 float _FurLength;
@@ -29,6 +28,7 @@ struct GeoToFragData
     float3 localNormal : LOCAL_NORMAL;
     float4 worldPosition : SV_POSITION;
     float3 worldNormal : NORMAL;
+    half3 ambient : TEXCOORD4;
     float furFactor: FUR_FACTOR;
 };
 
@@ -61,6 +61,7 @@ GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFac
     o.furFactor = furFactor;
     o.localNormal = localNormal;
     o.worldNormal = UnityObjectToWorldNormal(localNormal);
+    o.ambient = ShadeSHPerVertex(o.worldNormal, 0);
     return o;
 }
 
@@ -71,7 +72,7 @@ float3 calcFurDrift(float3 localPosition, float3 localNormal, float3 gravityDire
     return lerp(normalize(furDirection - (furDot - 0.5f) * localNormal), furDirection, furDot * 0.5 + 0.5) - localNormal;
 }
 
-[maxvertexcount(72)]
+[maxvertexcount(60)]
 void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStream<GeoToFragData> outStream)
 {
     float3 gravityDirection = mul( unity_WorldToObject, float4( 0, -1, 0, 0 ) ).xyz;
@@ -105,6 +106,6 @@ FragData frag (GeoToFragData i) : SV_Target {
     fd.albedo = half4(albedo, 1);
     fd.specular = half4(0, 0, 0, 0);
     fd.normal = half4(i.worldNormal * 0.5 + 0.5, 1);
-    fd.emission = half4(_EmissionAmount * albedo, 0);
+    fd.emission = half4(ShadeSHPerPixel(i.worldNormal, i.ambient, i.worldPosition) * albedo, 0);
     return fd;
 }

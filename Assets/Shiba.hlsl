@@ -64,9 +64,9 @@ GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFac
     return o;
 }
 
-float3 calcFurDrift(float3 localPosition, float3 localNormal) {
+float3 calcFurDrift(float3 localPosition, float3 localNormal, float3 gravityDirection) {
     float3 noise = snoise_grad(localPosition * _WindFrequency + _Time.z * float3(0, 1, 0) * _WindSpeed);
-    float3 furDirection = normalize(localNormal + float3(0, -1, 0) * _FurGravity + noise * _WindAmount);
+    float3 furDirection = normalize(localNormal + gravityDirection * _FurGravity + noise * _WindAmount);
     float furDot = dot(localNormal, furDirection);
     return lerp(normalize(furDirection - (furDot - 0.5f) * localNormal), furDirection, furDot * 0.5 + 0.5) - localNormal;
 }
@@ -74,9 +74,10 @@ float3 calcFurDrift(float3 localPosition, float3 localNormal) {
 [maxvertexcount(72)]
 void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStream<GeoToFragData> outStream)
 {
-    float3 furDrift0 = calcFurDrift(input[0].position, input[0].normal);
-    float3 furDrift1 = calcFurDrift(input[1].position, input[1].normal);
-    float3 furDrift2 = calcFurDrift(input[2].position, input[2].normal);
+    float3 gravityDirection = mul( unity_WorldToObject, float4( 0, -1, 0, 0 ) ).xyz;
+    float3 furDrift0 = calcFurDrift(input[0].position, input[0].normal, gravityDirection);
+    float3 furDrift1 = calcFurDrift(input[1].position, input[1].normal, gravityDirection);
+    float3 furDrift2 = calcFurDrift(input[2].position, input[2].normal, gravityDirection);
     outStream.Append(VertexOutput(input[0].position, input[0].normal, 0, furDrift0));
     outStream.Append(VertexOutput(input[1].position, input[1].normal, 0, furDrift1));
     outStream.Append(VertexOutput(input[2].position, input[2].normal, 0, furDrift2));

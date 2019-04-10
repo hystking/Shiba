@@ -6,8 +6,8 @@
         _WhiteColor("White Color", Color) = (1, 1, 1, 1)
         _ShibaThreshild("Shiba Threshold", Range(0, 1)) = 0.45
         _WhiteThreshild("White Threshold", Range(0, 1)) = 0.78
-        _NoiseAmount("Noise Amount", Range(0, 0.1)) = 0.05
-        _NoiseFrequency("Noise Frequency", Range(1, 24)) = 4
+        _FadeNoiseAmount("Noise Amount", Range(0, 1)) = 1
+        _FadeNoiseFrequency("Fade Noise Frequency", Range(1, 24)) = 4
         _FurFrequency("Fur Frequency", Range(64, 512)) = 256
         _FurLayers("Fur Layers", Range(0, 20)) = 16
         _FurLength("Fur Length", Range(0, 0.1)) = 0.025

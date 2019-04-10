@@ -2,8 +2,8 @@ float4 _ShibaColor;
 float4 _WhiteColor;
 float _ShibaThreshild;
 float _WhiteThreshild;
-float _NoiseAmount;
-float _NoiseFrequency;
+float _FadeNoiseAmount;
+float _FadeNoiseFrequency;
 float _FurAmount;
 float _FurDecay;
 float _FurLength;
@@ -96,8 +96,13 @@ void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStr
 
 FragData frag (GeoToFragData i) : SV_Target {
     FragData fd;
-    float noise = snoise(i.localPosition * _NoiseFrequency);
-    float mix = smoothstep(_ShibaThreshild, _WhiteThreshild, (dot(normalize(float3(0, -1, 0)), i.localNormal) + 1) * 0.5 + noise * _NoiseAmount);
+    float fadeNoise = snoise(i.localPosition * _FadeNoiseFrequency);
+    float mix = smoothstep(
+        _ShibaThreshild, 
+        _WhiteThreshild,
+        (dot(float3(0, -1, 0), i.localNormal) + 1) * 0.5
+    );
+    mix += (1 - abs(mix - 0.5) / 0.5) * fadeNoise * 0.5 * _FadeNoiseAmount;
     float3 albedo = lerp(_ShibaColor, _WhiteColor, mix) * (1 - (1 - i.furFactor) * _FurShade);
     float noise2 = abs(snoise(i.localPosition * _FurFrequency));
     float furLower = (0.5 - _FurAmount) * 2;

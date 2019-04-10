@@ -15,6 +15,7 @@ float _FurGravity;
 float _WindAmount;
 float _WindFrequency;
 float _WindSpeed;
+float _FurHardness;
 
 struct AppData
 {
@@ -48,13 +49,14 @@ AppData vert (AppData v)
 }
 
 
-GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFactor, float3 furDirection)
+GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFactor, float3 furDrift)
 {
     GeoToFragData o;
     o.localPosition = localPosition;
     o.worldPosition = UnityObjectToClipPos(
         localPosition
-        + furDirection * furFactor * _FurLength
+        + localNormal * furFactor * _FurLength
+        + furDrift * pow(furFactor, _FurHardness) * _FurLength
     );
     o.furFactor = furFactor;
     o.localNormal = localNormal;
@@ -62,28 +64,28 @@ GeoToFragData VertexOutput(float3 localPosition, half3 localNormal, float furFac
     return o;
 }
 
-float3 calcFurDirection(float3 localPosition, float3 localNormal) {
+float3 calcFurDrift(float3 localPosition, float3 localNormal) {
     float3 noise = snoise_grad(localPosition * _WindFrequency + _Time.z * float3(0, 1, 0) * _WindSpeed);
     float3 furDirection = normalize(localNormal + float3(0, -1, 0) * _FurGravity + noise * _WindAmount);
     float furDot = dot(localNormal, furDirection);
-    return lerp(furDirection - (furDot - 0.5f) * localNormal, furDirection, furDot * 0.5 + 0.5);
+    return lerp(normalize(furDirection - (furDot - 0.5f) * localNormal), furDirection, furDot * 0.5 + 0.5) - localNormal;
 }
 
 [maxvertexcount(72)]
 void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStream<GeoToFragData> outStream)
 {
-    float3 furDirection0 = calcFurDirection(input[0].position, input[0].normal);
-    float3 furDirection1 = calcFurDirection(input[1].position, input[1].normal);
-    float3 furDirection2 = calcFurDirection(input[2].position, input[2].normal);
-    outStream.Append(VertexOutput(input[0].position, input[0].normal, 0, furDirection0));
-    outStream.Append(VertexOutput(input[1].position, input[1].normal, 0, furDirection1));
-    outStream.Append(VertexOutput(input[2].position, input[2].normal, 0, furDirection2));
+    float3 furDrift0 = calcFurDrift(input[0].position, input[0].normal);
+    float3 furDrift1 = calcFurDrift(input[1].position, input[1].normal);
+    float3 furDrift2 = calcFurDrift(input[2].position, input[2].normal);
+    outStream.Append(VertexOutput(input[0].position, input[0].normal, 0, furDrift0));
+    outStream.Append(VertexOutput(input[1].position, input[1].normal, 0, furDrift1));
+    outStream.Append(VertexOutput(input[2].position, input[2].normal, 0, furDrift2));
     outStream.RestartStrip();
 
     for(int i = 1; i <= _FurLayers; i++) {
-        outStream.Append(VertexOutput(input[0].position, input[0].normal, i / _FurLayers, furDirection0));
-        outStream.Append(VertexOutput(input[1].position, input[1].normal, i / _FurLayers, furDirection1));
-        outStream.Append(VertexOutput(input[2].position, input[2].normal, i / _FurLayers, furDirection2));
+        outStream.Append(VertexOutput(input[0].position, input[0].normal, i / _FurLayers, furDrift0));
+        outStream.Append(VertexOutput(input[1].position, input[1].normal, i / _FurLayers, furDrift1));
+        outStream.Append(VertexOutput(input[2].position, input[2].normal, i / _FurLayers, furDrift2));
     }
 
     outStream.RestartStrip();

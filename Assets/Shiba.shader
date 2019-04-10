@@ -16,6 +16,7 @@
         _FurDecay("Fur Decay", Range(0, 1)) = 1
         _FurShade("Fur Shade", Range(0, 1)) = 0.3
         _FurGravity("Fur Gravity", Range(0, 1)) = 0.5
+        _FurHardness("Fur Hardness", Range(1, 8)) = 2
         _WindAmount("Wind Amount", Range(0, 2)) = 0.2
         _WindFrequency("Wind Frequency", Range(0, 8)) = 0.5
         _WindSpeed("Wind Speed", Range(0, 1)) = 0.2

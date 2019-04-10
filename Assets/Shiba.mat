@@ -26,6 +26,7 @@ Material:
     - _FurEmissive: 0.3
     - _FurFrequency: 200
     - _FurGravity: 0.8
+    - _FurHardness: 2
     - _FurLayers: 7
     - _FurLength: 0.02
     - _FurShade: 0.4

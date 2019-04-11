@@ -1,7 +1,11 @@
-float4 _ShibaColor;
-float4 _WhiteColor;
-float _ShibaThreshild;
-float _WhiteThreshild;
+float4 _MarbleColor1;
+float4 _MarbleColor2;
+float4 _BaseColor;
+float _MarbleColor1Threshold;
+float _MarbleColor2Threshold;
+float _MarbleColorFrequency;
+float _MarbleThreshild;
+float _BaseThreshild;
 float _FadeNoiseAmount;
 float _FadeNoiseFrequency;
 float _FurAmount;
@@ -96,14 +100,19 @@ void geo(triangle AppData input[3], uint pid : SV_PrimitiveID, inout TriangleStr
 
 FragData frag (GeoToFragData i) : SV_Target {
     FragData fd;
+    float marbleNoise = snoise(i.localPosition * _MarbleColorFrequency);
     float fadeNoise = snoise(i.localPosition * _FadeNoiseFrequency);
     float mix = smoothstep(
-        _ShibaThreshild, 
-        _WhiteThreshild,
+        _MarbleThreshild, 
+        _BaseThreshild,
         (dot(float3(0, -1, 0), i.localNormal) + 1) * 0.5
     );
     mix += (1 - abs(mix - 0.5) / 0.5) * fadeNoise * 0.5 * _FadeNoiseAmount;
-    float3 albedo = lerp(_ShibaColor, _WhiteColor, mix) * (1 - (1 - i.furFactor) * _FurShade);
+    float3 albedo = lerp(
+        lerp(_MarbleColor1, _MarbleColor2, smoothstep(_MarbleColor1Threshold * 2 - 1, _MarbleColor2Threshold * 2 - 1, marbleNoise)),
+        _BaseColor,
+        mix
+    ) * (1 - (1 - i.furFactor) * _FurShade);
     float noise2 = abs(snoise(i.localPosition * _FurFrequency));
     float furLower = (0.5 - _FurAmount) * 2;
     float alpha = i.furFactor > 0 ? i.furFactor * (1 - furLower) * _FurDecay + furLower : -1;

@@ -20,7 +20,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
+    - _BaseThreshild: 0.78
     - _EmissionAmount: 0.3
+    - _FadeNoiseAmount: 1
+    - _FadeNoiseFrequency: 4
     - _FurAmount: 0.33
     - _FurDecay: 0.34
     - _FurEmissive: 0.3
@@ -30,6 +33,10 @@ Material:
     - _FurLayers: 7
     - _FurLength: 0.02
     - _FurShade: 0.4
+    - _MarbleColor1Threshold: 0.4
+    - _MarbleColor2Threshold: 0.6
+    - _MarbleColorFrequency: 1
+    - _MarbleThreshild: 0.45
     - _NoiseAmount: 0.05
     - _NoiseFrequency: 4
     - _ShibaThreshild: 0.45
@@ -38,5 +45,8 @@ Material:
     - _WindFrequency: 0.5
     - _WindSpeed: 0.2
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MarbleColor1: {r: 0.8666667, g: 0.6156863, b: 0.34901962, a: 1}
+    - _MarbleColor2: {r: 0.8666667, g: 0.6156863, b: 0.34901962, a: 1}
     - _ShibaColor: {r: 0.8679245, g: 0.61740994, b: 0.3479886, a: 1}
     - _WhiteColor: {r: 1, g: 1, b: 1, a: 1}

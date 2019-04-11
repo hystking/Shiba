@@ -20,22 +20,41 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
+    - _BaseThreshild: 1
     - _EmissionAmount: 0.5
+    - _FadeNoiseAmount: 1
+    - _FadeNoiseFrequency: 1
     - _FurAmount: 0.48
     - _FurDecay: 0.8
     - _FurEmissive: 0.3
     - _FurFrequency: 64
     - _FurGravity: 0
+    - _FurHardness: 2
     - _FurLayers: 7
     - _FurLength: 0.059
     - _FurShade: 1
+    - _MarbleColor1Threshold: 0.5
+    - _MarbleColor2Threshold: 0.5
+    - _MarbleColorFrequency: 24
+    - _MarbleThreshild: 1
     - _NoiseAmount: 0.1
     - _NoiseFrequency: 32
+    - _ShibaMarbleNoiseFrequency: 1
+    - _ShibaMarbleNoiseSmoothness: 1
+    - _ShibaMarbleThreshold1: 0.4
+    - _ShibaMarbleThreshold2: 0.6
+    - _ShibaNoiseThreshold1: 0.4
+    - _ShibaNoiseThreshold2: 0.6
     - _ShibaThreshild: 0
     - _WhiteThreshild: 0
     - _WindAmount: 0.2
     - _WindFrequency: 0.5
     - _WindSpeed: 0.2
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MarbleColor1: {r: 0.25142393, g: 0.4716981, b: 0.26073134, a: 1}
+    - _MarbleColor2: {r: 0.41815594, g: 0.47058815, b: 0.2509804, a: 1}
     - _ShibaColor: {r: 0.25142398, g: 0.4716981, b: 0.26073134, a: 1}
+    - _ShibaColor1: {r: 0.7, g: 0.5, b: 0.29999998, a: 1}
+    - _ShibaColor2: {r: 0.7, g: 0.5, b: 0.29999998, a: 1}
     - _WhiteColor: {r: 0.418156, g: 0.47058824, b: 0.2509804, a: 1}

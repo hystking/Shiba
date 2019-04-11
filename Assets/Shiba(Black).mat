@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shiba
+  m_Name: Shiba(Black)
   m_Shader: {fileID: 4800000, guid: b304d0a1c4e51489abb5a7ce42f2c701, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,23 +20,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _BaseThreshild: 0.78
+    - _BaseThreshild: 0.733
     - _EmissionAmount: 0.3
     - _FadeNoiseAmount: 1
     - _FadeNoiseFrequency: 4
-    - _FurAmount: 0.42
-    - _FurDecay: 0.41
+    - _FurAmount: 0.712
+    - _FurDecay: 0.902
     - _FurEmissive: 0.3
-    - _FurFrequency: 200
+    - _FurFrequency: 348
     - _FurGravity: 0.8
-    - _FurHardness: 2
+    - _FurHardness: 4
     - _FurLayers: 7
-    - _FurLength: 0.01
-    - _FurShade: 0.4
+    - _FurLength: 0.0075
+    - _FurShade: 0.72
     - _MarbleColor1Threshold: 0.4
     - _MarbleColor2Threshold: 0.6
     - _MarbleColorFrequency: 1
-    - _MarbleThreshild: 0.45
+    - _MarbleThreshild: 0.52
     - _NoiseAmount: 0.05
     - _NoiseFrequency: 4
     - _ShibaThreshild: 0.45
@@ -46,7 +46,7 @@ Material:
     - _WindSpeed: 0.2
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MarbleColor1: {r: 0.8666667, g: 0.6156863, b: 0.34901962, a: 1}
-    - _MarbleColor2: {r: 0.8666667, g: 0.6156863, b: 0.34901962, a: 1}
+    - _MarbleColor1: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
+    - _MarbleColor2: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
     - _ShibaColor: {r: 0.8679245, g: 0.61740994, b: 0.3479886, a: 1}
     - _WhiteColor: {r: 1, g: 1, b: 1, a: 1}

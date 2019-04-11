@@ -31,7 +31,7 @@ Material:
     - _FurGravity: 0
     - _FurHardness: 2
     - _FurLayers: 7
-    - _FurLength: 0.059
+    - _FurLength: 0.04
     - _FurShade: 1
     - _MarbleColor1Threshold: 0.5
     - _MarbleColor2Threshold: 0.5
